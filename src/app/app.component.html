@@ -1,0 +1,19 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="itemContainer" style="margin-top: 12rem; padding-top: 5px; padding-bottom: 5px; justify-content: space-evenly;">
+  <div id="course_cards" class="card-deck" *ngFor="let course of Box.courses; let i = index;">
+
+    <div class="card" style="width: 18rem;" >
+      <img [src]="Box.courses[i].image" class="card-img-top" alt="{{Box.courses[i].name}}" title="{{Box.courses[i].name}}" style="height: 10rem;">
+      <div class="card-body">
+        <h5 class="card-title">{{Box.courses[i].name}}</h5>
+        <p class="card-text">{{Box.courses[i].id}}</p>
+        <a href="#" class="btn btn-outline-success" id="0">Golf it!</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<router-outlet></router-outlet>
