@@ -1,9 +1,35 @@
-<div class="itemContainer" style="margin-top: 12rem; padding-top: 5px; padding-bottom: 5px; justify-content: space-evenly;">
-  <div class="card" style="width: 18rem;">
+<div class="itemContainer" id="scoreCardContainer" style="margin-top: 4rem; margin-bottom: 1rem; padding-top: 5px; padding-bottom: 5px; justify-content: space-evenly;">
+  <div class="card" style="display: inline-flex;">
     <div class="card-body">
-      <h5 class="card-title">Scorecard-title</h5>
-      <p class="card-text">Scorecard-text</p>
-      <a href="#" class="btn btn-outline-success" id="">Golf it!</a>
+      <h5 class="card-title">{{golfCourse.data.name}} Scorecard</h5>
+      <div id="rowCont">
+        <div class="card" id="scoreCardData" style="background-color: #343A40; border-color: #181A1B; flex-direction: row; text-align: center; display: inline-flex;">
+          <div id="emptyCol" class="column" style="display: inline-flex;">
+            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px; height: 100%;"></div>
+            <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Total:</div>
+          </div>
+          <div id="holeCol" class="column" style="display: inline-flex;">
+            <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Hole</div>
+            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'holeBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].hole}}</div>
+            <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;" id="totalHole">{{golfCourse.data.holes.length}}</div>
+          </div>
+          <div id="yrdCol" class="column" style="display: inline-flex;">
+            <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Yards</div>
+            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'yrdBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].teeBoxes[0].yards}}</div>
+          </div>
+          <div id="hcpCol" class="column" style="display: inline-flex;">
+            <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">HCP</div>
+            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'hcpBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].teeBoxes[0].hcp}}</div>
+          </div>
+          <div id="parCol" class="column" style="display: inline-flex;">
+            <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Par</div>
+            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'parBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].teeBoxes[0].par}}</div>
+          </div>
+          <div id="playerCols">
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
