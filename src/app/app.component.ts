@@ -8,11 +8,8 @@ import {GolfApiService} from "./golf-api.service";
 })
 
 export class AppComponent {
-  Box: Object = {};
-  constructor(private _golfApiService: GolfApiService) { }
+  constructor() { }
   ngOnInit() {
-    this._golfApiService.getGolfApi()
-      .subscribe(data => this.Box = data);
-    console.log(this.Box);
+
   }
 }

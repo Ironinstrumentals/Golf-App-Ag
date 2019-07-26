@@ -5,11 +5,17 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { ScorecardComponent } from './scorecard/scorecard.component';
+import { GolfCourseComponent } from './golf-course/golf-course.component';
+import { CourseListComponent } from './course-list/course-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    ScorecardComponent,
+    GolfCourseComponent,
+    CourseListComponent,
   ],
   imports: [
     BrowserModule,
