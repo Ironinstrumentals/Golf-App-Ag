@@ -13,7 +13,9 @@ export class GolfCourseComponent implements OnInit {
   ngOnInit() {
     this._golfCourseService.getGolfCourse()
       .subscribe(data => this.golfCourse = data);
-    console.log(this.golfCourse);
+  }
+  logCourse(param) {
+    console.log(param)
   }
 
 }

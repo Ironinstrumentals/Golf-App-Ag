@@ -10,26 +10,32 @@
           </div>
           <div id="holeCol" class="column" style="display: inline-flex;">
             <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Hole</div>
-            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'holeBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].hole}}</div>
+            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'holeBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[Tee].hole}}</div>
             <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;" id="totalHole">{{golfCourse.data.holes.length}}</div>
           </div>
           <div id="yrdCol" class="column" style="display: inline-flex;">
             <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Yards</div>
-            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'yrdBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].teeBoxes[0].yards}}</div>
+            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'yrdBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].teeBoxes[Tee].yards}}</div>
+            <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;" id="totalYards" (load)="getTotalYards()">{{getTotalYards()}}</div>
           </div>
           <div id="hcpCol" class="column" style="display: inline-flex;">
             <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">HCP</div>
-            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'hcpBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].teeBoxes[0].hcp}}</div>
+            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'hcpBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].teeBoxes[Tee].hcp}}</div>
+            <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;" id="totalHCP">{{getTotalHCP()}}</div>
           </div>
           <div id="parCol" class="column" style="display: inline-flex;">
             <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Par</div>
-            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'parBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].teeBoxes[0].par}}</div>
+            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'parBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].teeBoxes[Tee].par}}</div>
+            <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;" id="totalPar">{{getTotalPar()}}</div>
           </div>
-          <div id="playerCols">
-
+          <div id="plr{{i+1}}" class="column" style="display: inline-flex;" *ngFor="let number of plrArry; let i = index;">
+            <input class="card-header" id="plr{{i+1}}_name" style="border: solid #2b3035 1px; padding: 4px; width: 8rem; text-align: center; color: ghostwhite;" placeholder="Player {{i + 1}}">
+            <input class="card-header" id="plr{{i+1}}_H{{k}}" style="border: solid #2b3035 1px; padding: 4px; color: ghostwhite; text-align: center; width: 8rem;" *ngFor="let numero of golfCourse.data.holes; let k = index;" type="number" value="0" (input)="calculateScore((i+1))" (change)="calculateScore((i+1))">
+            <input class="card-header" id="plr{{i+1}}_score" style="border: solid #2b3035 1px; padding: 4px; width: 8rem; text-align: center; color: ghostwhite;" type="number" placeholder="score" value="0" disabled>
           </div>
         </div>
       </div>
+      <div id="cbody">{{genBackButton()}}</div>
     </div>
   </div>
 </div>

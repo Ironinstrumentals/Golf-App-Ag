@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { ScorecardComponent } from './scorecard/scorecard.component';
 import { GolfCourseComponent } from './golf-course/golf-course.component';
 import { CourseListComponent } from './course-list/course-list.component';
+import { NoNameDupesPipe } from './no-name-dupes.pipe';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { CourseListComponent } from './course-list/course-list.component';
     ScorecardComponent,
     GolfCourseComponent,
     CourseListComponent,
+    NoNameDupesPipe,
   ],
   imports: [
     BrowserModule,

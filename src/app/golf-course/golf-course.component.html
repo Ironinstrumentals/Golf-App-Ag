@@ -1,7 +1,7 @@
 <div class="itemContainer" id='golfCourseComponent' style="margin-top: 8rem; margin-bottom: 4rem; padding-top: 5px; padding-bottom: 5px; justify-content: space-evenly;">
   <div class="card" style="width: 22rem;">
-    <img src="{{golfCourse.data.thumbnail}}" class="card-img-top" alt="Image of {{golfCourse.data.name}}" title="{{golfCourse.data.name}} Image" style="height: 10rem;">
-    <div class="card-body">
+    <img src="{{golfCourse.data.thumbnail}}" class="card-img-top" alt="Image of {{golfCourse.data.name}}" title="{{golfCourse.data.name}} Image" style="height: 10rem;" (click)="logCourse(golfCourse)">
+    <div class="card-body" (load)="console.log(golfCourse)">
       <h5 class="card-title">{{golfCourse.data.name}}</h5>
       <p class="card-text">Address: {{golfCourse.data.addr1}}, {{golfCourse.data.city}}, {{golfCourse.data.stateOrProvince}}, {{golfCourse.data.country}}</p>
       <p class="card-text">Phone: {{golfCourse.data.phone}}</p>
@@ -11,7 +11,12 @@
       <p class="card-text">Measurement: {{golfCourse.data.measurementType}}</p>
       <p class="card-text">Hole Count: {{golfCourse.data.holeCount}}</p>
       <p class="card-text"><label>Number of Players: <select id="playerNum"><option>1</option><option>2</option><option>3</option><option>4</option></select></label></p>
-      <button class="btn btn-outline-success" onclick="document.location.href = ('/scorecard#' + this.id + '$' + document.getElementById('playerNum').value)" id="{{golfCourse.data.id}}">Golf it!</button>
+      <p class="card-text"><label>Tee: <select id="selectTee" ><option>Pro</option><option>Champion</option><option>Men</option><option>Women</option></select></label></p>
+      <div style="display: flex; justify-content: space-between; align-content: center; align-items: center; justify-items: center;">
+        <a href="/">Back</a>
+        <button class="btn btn-outline-success" onclick="document.location.href = ('/scorecard#' + this.id + '$' + document.getElementById('playerNum').value + '&' + document.getElementById('selectTee').value)" id="{{golfCourse.data.id}}">Golf it!</button>
+      </div>
+
     </div>
   </div>
 </div>
