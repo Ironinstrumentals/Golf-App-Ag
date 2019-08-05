@@ -7,7 +7,6 @@ import {GolfCourseService} from "../golf-course.service";
   styleUrls: ['./scorecard.component.css']
 })
 export class ScorecardComponent implements OnInit {
-  note: string = '✓';
   golfCourse: any;
   Tee: number = 4;
   plrCount: number = 1;
@@ -80,7 +79,6 @@ export class ScorecardComponent implements OnInit {
     this.getTotalYards();
   }
   calculateScore(playerNum) {
-    this.note = '◦';
     let score: number = 0;
     let scoreVar: any;
     for (let i = 0; i < this.golfCourse.data.holes.length; i++) {
@@ -100,12 +98,19 @@ export class ScorecardComponent implements OnInit {
     }
     // @ts-ignore
     document.getElementById(`plr${playerNum}_score`).value = score;
+    let note: string = '✓';
     if (score > 72) {
-      this.note = '✗';
+      note = '✗';
+      // @ts-ignore
+      document.getElementById(`plr${playerNum}_note`).value = note;
     } else if (score == 72) {
-      this.note = '◦';
+      note = '◦';
+      // @ts-ignore
+      document.getElementById(`plr${playerNum}_note`).value = note;
     } else if (score < 72) {
-      this.note = '✓';
+      note = '✓';
+      // @ts-ignore
+      document.getElementById(`plr${playerNum}_note`).value = note;
     }
   }
 
