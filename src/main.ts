@@ -1,3 +1,4 @@
+import 'hammerjs';
 import { enableProdMode } from '@angular/core';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';

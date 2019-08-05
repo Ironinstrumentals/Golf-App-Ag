@@ -7,6 +7,7 @@ import {GolfCourseService} from "../golf-course.service";
   styleUrls: ['./scorecard.component.css']
 })
 export class ScorecardComponent implements OnInit {
+  note: string = '✓';
   golfCourse: any;
   Tee: number = 4;
   plrCount: number = 1;
@@ -14,7 +15,7 @@ export class ScorecardComponent implements OnInit {
   totalYards: number = 0;
   constructor(private _golfCourseService: GolfCourseService) { }
   genBackButton() {
-    document.getElementById('cbody').innerHTML += `<a href="/${this._golfCourseService.courseID}">Back</a>`;
+    document.getElementById('cbody').innerHTML = `<a href="/${this._golfCourseService.courseID}">Back</a>`;
   }
   getTotalYards() {
     let Yards: number = 0;
@@ -79,12 +80,16 @@ export class ScorecardComponent implements OnInit {
     this.getTotalYards();
   }
   calculateScore(playerNum) {
-
+    this.note = '◦';
     let score: number = 0;
     let scoreVar: any;
     for (let i = 0; i < this.golfCourse.data.holes.length; i++) {
       // @ts-ignore
       if (parseInt(document.getElementById(`plr${playerNum}_H${i}`).value) < 0) {
+        // @ts-ignore
+        document.getElementById(`plr${playerNum}_H${i}`).value = 0;
+        // @ts-ignore
+      } else if (document.getElementById(`plr${playerNum}_H${i}`).value == '') {
         // @ts-ignore
         document.getElementById(`plr${playerNum}_H${i}`).value = 0;
       }
@@ -95,6 +100,13 @@ export class ScorecardComponent implements OnInit {
     }
     // @ts-ignore
     document.getElementById(`plr${playerNum}_score`).value = score;
+    if (score > 72) {
+      this.note = '✗';
+    } else if (score == 72) {
+      this.note = '◦';
+    } else if (score < 72) {
+      this.note = '✓';
+    }
   }
 
 }

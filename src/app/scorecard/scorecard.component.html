@@ -1,4 +1,4 @@
-<div class="itemContainer" id="scoreCardContainer" style="margin-top: 4rem; margin-bottom: 1rem; padding-top: 5px; padding-bottom: 5px; justify-content: space-evenly;">
+<div class="itemContainer" id="scoreCardContainer" style="margin-top: 4rem; margin-bottom: 1rem; padding-top: 5px; padding-bottom: 5px; justify-content: space-evenly; display: inline-flex; width: 100%;">
   <div class="card" style="display: inline-flex;">
     <div class="card-body">
       <h5 class="card-title">{{golfCourse.data.name}} Scorecard</h5>
@@ -7,6 +7,7 @@
           <div id="emptyCol" class="column" style="display: inline-flex;">
             <div class="card-header" style="border: solid #2b3035 1px; padding: 4px; height: 100%;"></div>
             <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Total:</div>
+            <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Note:</div>
           </div>
           <div id="holeCol" class="column" style="display: inline-flex;">
             <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Hole</div>
@@ -32,6 +33,7 @@
             <input class="card-header" id="plr{{i+1}}_name" style="border: solid #2b3035 1px; padding: 4px; width: 8rem; text-align: center; color: ghostwhite;" placeholder="Player {{i + 1}}">
             <input class="card-header" id="plr{{i+1}}_H{{k}}" style="border: solid #2b3035 1px; padding: 4px; color: ghostwhite; text-align: center; width: 8rem;" *ngFor="let numero of golfCourse.data.holes; let k = index;" type="number" value="0" (input)="calculateScore((i+1))" (change)="calculateScore((i+1))">
             <input class="card-header" id="plr{{i+1}}_score" style="border: solid #2b3035 1px; padding: 4px; width: 8rem; text-align: center; color: ghostwhite;" type="number" placeholder="score" value="0" disabled>
+            <input class="card-header" id="plr{{i+1}}_note" type="text" style="border: solid #2b3035 1px; width: 100%; padding: 4px; color: ghostwhite; text-align: center; width: 8rem; padding-right: 10px;" disabled value="{{note}}">
           </div>
         </div>
       </div>

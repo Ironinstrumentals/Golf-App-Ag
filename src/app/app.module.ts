@@ -9,6 +9,7 @@ import { ScorecardComponent } from './scorecard/scorecard.component';
 import { GolfCourseComponent } from './golf-course/golf-course.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { NoNameDupesPipe } from './no-name-dupes.pipe';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { NoNameDupesPipe } from './no-name-dupes.pipe';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [NavbarComponent, AppComponent]
