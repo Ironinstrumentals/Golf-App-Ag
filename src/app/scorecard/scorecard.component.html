@@ -38,7 +38,7 @@
             <input class="card-header" id="plr{{i+1}}_name" style="border: solid #2b3035 1px; padding: 4px; width: 8rem; text-align: center; color: ghostwhite;" placeholder="Player {{i + 1}}" (change)="noNameDupes(); calculateScore((i+1));">
             <input class="card-header" id="plr{{i+1}}_H{{k}}" style="border: solid #2b3035 1px; padding: 4px; color: ghostwhite; text-align: center; width: 8rem;" *ngFor="let numero of golfCourse.data.holes; let k = index;" type="number" value="0" (input)="calculateScore((i+1));" (change)="calculateScore((i+1));">
             <input class="card-header" id="plr{{i+1}}_score" style="border: solid #2b3035 1px; padding: 4px; width: 8rem; text-align: center; color: ghostwhite;" type="number" placeholder="score" value="0" disabled>
-            <input class="card-header" id="plr{{i+1}}_note" type="text" style="border: solid #2b3035 1px; width: 100%; padding: 4px; color: ghostwhite; text-align: center; width: 8rem; padding-right: 10px;" disabled value="✓">
+            <input class="card-header" id="plr{{i+1}}_note" type="text" style="border: solid #2b3035 1px; padding: 4px; color: ghostwhite; text-align: center; width: 8rem; padding-right: 10px;" disabled value="✓">
           </div>
         </div>
       </div>
