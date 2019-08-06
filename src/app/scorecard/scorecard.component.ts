@@ -1,5 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {GolfCourseService} from "../golf-course.service";
+import * as firebase from "firebase";
+
+firebase.initializeApp({
+  apiKey: '### FIREBASE API KEY ###',
+  authDomain: '### FIREBASE AUTH DOMAIN ###',
+  projectId: 'angular-golf-app-55a6a'
+});
+const db = firebase.firestore();
 
 @Component({
   selector: 'app-scorecard',
@@ -10,6 +18,7 @@ export class ScorecardComponent implements OnInit {
   document = document;
   golfCourse: any;
   Tee: number = 4;
+  TeeType: string = '';
   plrCount: number = 1;
   plrArry: any[];
   totalYards: number = 0;
@@ -56,12 +65,16 @@ export class ScorecardComponent implements OnInit {
     if (document.location.href.includes('&')) {
       if (document.location.href.includes('Pro')) {
         this.Tee = 0;
+        this.TeeType = 'Pro';
       } else if (document.location.href.includes('Champion')) {
         this.Tee = 1;
+        this.TeeType = 'Champion';
       } else if (document.location.href.includes('Men')) {
         this.Tee = 2;
+        this.TeeType = 'Men';
       } else if (document.location.href.includes('Women')) {
         this.Tee = 3;
+        this.TeeType = 'Women';
       } else {
         this.Tee = 4;
       }
@@ -249,25 +262,46 @@ export class ScorecardComponent implements OnInit {
       this.players[3].name = document.getElementById('plr4_name').value;
     }
   }
+  getData() {
+
+  }
   loadData() {
-    if (document.location.href.includes(JSON.parse(localStorage.getItem('Course')))) {
-      if (document.location.href.includes('$' + JSON.parse(localStorage.getItem('PLR_CNT')))) {
-        this.players = JSON.parse(localStorage.getItem('Data'));
-        for (let k = 0; k < this.players.length; k++) {
-          // @ts-ignore
-          document.getElementById(`plr${k+1}_name`).value = this.players[k].name;
-          for (let i = 0; i < this.golfCourse.data.holes.length; i++) {
-            // @ts-ignore
-            document.getElementById(`plr${k+1}_H${i}`).value = this.players[k].score[i];
+    let DBPlayers;
+    const docRef = db.collection("sessionData").doc("data");
+    docRef.get().then(function(doc) {
+      if (doc.exists) {
+        // @ts-ignore
+        DBPlayers = doc.data();
+        if (document.location.href.includes(DBPlayers.courseID)) {
+          if (document.location.href.includes(`$${DBPlayers.playerNum}`)) {
+            if (document.location.href.includes(`&${DBPlayers.Tee}`)) {
+              for (let k = 0; k < DBPlayers.playerNum; k++) {
+                // @ts-ignore
+                document.getElementById(`plr${k+1}_name`).value = DBPlayers.players[k].name;
+                for (let i = 0; i < DBPlayers.players[k].score.length; i++) {
+                  // @ts-ignore
+                  document.getElementById(`plr${k+1}_H${i}`).value = DBPlayers.players[k].score[i];
+                }
+              }
+            } else {
+              alert(`The Data you are trying to load is for:\nThe ${DBPlayers.Tee} Tee\n Redirecting You Now...`);
+              document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}`;
+              document.location.reload();
+            }
+          } else {
+           alert(`The Data you are trying to load is for:\n${DBPlayers.playerNum} player(s)\n Redirecting You Now...`);
+            document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}`;
+            document.location.reload();
           }
+        } else {
+          alert(`The Data you are trying to load is for:\n${DBPlayers.courseName}\nRedirecting You Now...`);
+          document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}`;
+          document.location.reload();
         }
-        // console.log(this.players);
-      } else {
-        alert(`INCORRECT PLAYER COUNT:\nthe data you are trying to load is for\n ${JSON.parse(localStorage.getItem('PLR_CNT'))} player(s)`)
       }
-    } else {
-      alert(`INCORRECT COURSE:\nthe data you are trying to load is for\n "${JSON.parse(localStorage.getItem('CourseName'))}"`);
-    }
+    }).catch(function(error) {
+      console.log("Error getting document:", error);
+    });
   }
   saveData() {
     if (document.getElementById('plr1_name')) {
@@ -286,10 +320,20 @@ export class ScorecardComponent implements OnInit {
       // @ts-ignore
       this.players[3].name = document.getElementById('plr4_name').value
     }
-    localStorage.setItem('Data', JSON.stringify(this.players));
-    localStorage.setItem('Course', JSON.stringify(this._golfCourseService.courseID));
-    localStorage.setItem('CourseName', JSON.stringify(this.golfCourse.data.name));
-    localStorage.setItem('PLR_CNT', JSON.stringify(this.players.length));
     // console.log(this.players);
+    // SAVE HERE
+    db.collection("sessionData").doc("data").set({
+      players: this.players,
+      courseID: this.golfCourse.data.id,
+      playerNum: this.players.length,
+      courseName: this.golfCourse.data.name,
+      Tee: this.TeeType
+    })
+      .then(function() {
+        console.log("Document successfully written!");
+      })
+      .catch(function(error) {
+        console.error("Error writing document: ", error);
+      });
   }
 }

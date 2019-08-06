@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "Golf-App-Ag",
+      "public": "dist/Golf-App-Ag",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

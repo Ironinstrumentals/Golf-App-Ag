@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "angular-golf-app-55a6a": {
+      "hosting": {
+        "Golf-App-Ag": [
+          "angular-golf-app-55a6a"
+        ]
+      }
+    }
+  }
+}
