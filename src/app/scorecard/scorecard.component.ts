@@ -145,7 +145,6 @@ export class ScorecardComponent implements OnInit {
     }
     this._golfCourseService.getGolfCourse().subscribe(data => this.golfCourse = data);
     this.getTotalYards();
-    this.setLoad();
   }
   calculateScore(playerNum) {
     let score: number = 0;
