@@ -18,7 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ScorecardComponent,
     GolfCourseComponent,
     CourseListComponent,
-    NoNameDupesPipe,
+    NoNameDupesPipe
   ],
   imports: [
     BrowserModule,

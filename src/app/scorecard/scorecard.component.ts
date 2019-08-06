@@ -113,5 +113,61 @@ export class ScorecardComponent implements OnInit {
       document.getElementById(`plr${playerNum}_note`).value = note;
     }
   }
+  noNameDupes() {
+    for (let i = 0; i < 4; i++) {
+      if (document.getElementById('plr2_name')) {
+        // @ts-ignore
+        if (document.getElementById('plr1_name').value != '') {
+          // @ts-ignore
+          if (document.getElementById('plr1_name').value == document.getElementById('plr2_name').value) {
+            // alert('Name Duplication Detected, Resolving...');
+            // @ts-ignore
+            document.getElementById('plr2_name').value += '+';
+          }
+        }
 
+        // @ts-ignore
+        if (document.getElementById('plr2_name').value != '') {
+          // @ts-ignore
+          if (document.getElementById('plr2_name').value == document.getElementById('plr3_name').value) {
+            // alert('Name Duplication Detected, Resolving...');
+            // @ts-ignore
+            document.getElementById('plr3_name').value += '+';
+          }
+        }
+        // @ts-ignore
+        if (document.getElementById('plr3_name').value != '')
+          if (document.getElementById('plr3_name')) {
+            // @ts-ignore
+            if (document.getElementById('plr1_name').value == document.getElementById('plr3_name').value) {
+              // alert('Name Duplication Detected, Auto Resolving...');
+              // @ts-ignore
+              document.getElementById('plr3_name').value += '+';
+            }
+            if (document.getElementById('plr4_name')) {
+              // @ts-ignore
+              if (document.getElementById('plr4_name').value != '')
+              // @ts-ignore
+                if (document.getElementById('plr1_name').value == document.getElementById('plr4_name').value) {
+                  // alert('Name Duplication Detected, Auto Resolving...');
+                  // @ts-ignore
+                  document.getElementById('plr4_name').value += '+';
+                }
+              // @ts-ignore
+              if (document.getElementById('plr2_name').value == document.getElementById('plr4_name').value) {
+                // alert('Name Duplication Detected, Auto Resolving...');
+                // @ts-ignore
+                document.getElementById('plr4_name').value += '+';
+              }
+              // @ts-ignore
+              if (document.getElementById('plr3_name').value == document.getElementById('plr4_name').value) {
+                // alert('Name Duplication Detected, Auto Resolving...');
+                // @ts-ignore
+                document.getElementById('plr4_name').value += '+';
+              }
+            }
+          }
+      }
+    }
+  }
 }
