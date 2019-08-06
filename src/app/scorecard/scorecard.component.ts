@@ -1,14 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {GolfCourseService} from "../golf-course.service";
 import * as firebase from "firebase";
-
 firebase.initializeApp({
   apiKey: '### FIREBASE API KEY ###',
   authDomain: '### FIREBASE AUTH DOMAIN ###',
   projectId: 'angular-golf-app-55a6a'
 });
 const db = firebase.firestore();
-
 @Component({
   selector: 'app-scorecard',
   templateUrl: './scorecard.component.html',
