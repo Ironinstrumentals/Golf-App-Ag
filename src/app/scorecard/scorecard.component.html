@@ -1,7 +1,12 @@
 <div class="itemContainer" id="scoreCardContainer" style="margin-top: 4rem; margin-bottom: 1rem; padding-top: 5px; padding-bottom: 5px; justify-content: space-evenly; display: inline-flex; width: 100%;">
   <div class="card" style="display: inline-flex;">
     <div class="card-body">
-      <h5 class="card-title">{{golfCourse.data.name}} Scorecard</h5>
+      <h5 class="card-title">{{golfCourse.data.name}} Scorecard </h5>
+      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+        <a href="{{document.location.href}}" class="card-link" (click)="saveData();">Save</a>
+        <a href="{{document.location.href}}" class="card-link" (click)="loadData();">Load</a>
+      </div>
+
       <div id="rowCont">
         <div class="card" id="scoreCardData" style="background-color: #343A40; border-color: #181A1B; flex-direction: row; text-align: center; display: inline-flex;">
           <div id="emptyCol" class="column" style="display: inline-flex;">
@@ -11,7 +16,7 @@
           </div>
           <div id="holeCol" class="column" style="display: inline-flex;">
             <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;">Hole</div>
-            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'holeBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[Tee].hole}}</div>
+            <div class="card-header" style="border: solid #2b3035 1px; padding: 4px;" *ngFor="let hole of golfCourse.data.holes; let i = index;" [id]="'holeBox' + (golfCourse.data.holes[i].hole)">{{golfCourse.data.holes[i].hole}}</div>
             <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;" id="totalHole">{{golfCourse.data.holes.length}}</div>
           </div>
           <div id="yrdCol" class="column" style="display: inline-flex;">
@@ -30,7 +35,7 @@
             <div class="card-header" style="border: solid #2b3035 1px; width: 100%; padding: 4px;" id="totalPar">{{getTotalPar()}}</div>
           </div>
           <div id="plr{{i+1}}" class="column" style="display: inline-flex;" *ngFor="let number of plrArry; let i = index;">
-            <input class="card-header" id="plr{{i+1}}_name" style="border: solid #2b3035 1px; padding: 4px; width: 8rem; text-align: center; color: ghostwhite;" placeholder="Player {{i + 1}}" (change)="noNameDupes();">
+            <input class="card-header" id="plr{{i+1}}_name" style="border: solid #2b3035 1px; padding: 4px; width: 8rem; text-align: center; color: ghostwhite;" placeholder="Player {{i + 1}}" (change)="noNameDupes(); calculateScore((i+1));">
             <input class="card-header" id="plr{{i+1}}_H{{k}}" style="border: solid #2b3035 1px; padding: 4px; color: ghostwhite; text-align: center; width: 8rem;" *ngFor="let numero of golfCourse.data.holes; let k = index;" type="number" value="0" (input)="calculateScore((i+1));" (change)="calculateScore((i+1));">
             <input class="card-header" id="plr{{i+1}}_score" style="border: solid #2b3035 1px; padding: 4px; width: 8rem; text-align: center; color: ghostwhite;" type="number" placeholder="score" value="0" disabled>
             <input class="card-header" id="plr{{i+1}}_note" type="text" style="border: solid #2b3035 1px; width: 100%; padding: 4px; color: ghostwhite; text-align: center; width: 8rem; padding-right: 10px;" disabled value="✓">
