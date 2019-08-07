@@ -6,6 +6,7 @@ firebase.initializeApp({
   authDomain: '### FIREBASE AUTH DOMAIN ###',
   projectId: 'angular-golf-app-55a6a'
 });
+
 const db = firebase.firestore();
 @Component({
   selector: 'app-scorecard',
@@ -13,6 +14,7 @@ const db = firebase.firestore();
   styleUrls: ['./scorecard.component.css']
 })
 export class ScorecardComponent implements OnInit {
+  docRef: any = db.collection("sessionData").doc("data");
   document = document;
   golfCourse: any;
   Tee: number = 4;
@@ -90,7 +92,7 @@ export class ScorecardComponent implements OnInit {
         ]
       } else if (document.location.href.includes('$2')) {
         this.plrCount = 2;
-        this.plrArry = [1,2];
+        this.plrArry = [1, 2];
         this.players = [
           {
             name: 'Player 1',
@@ -103,7 +105,7 @@ export class ScorecardComponent implements OnInit {
         ]
       } else if (document.location.href.includes('$3')) {
         this.plrCount = 3;
-        this.plrArry = [1,2,3];
+        this.plrArry = [1, 2, 3];
         this.players = [
           {
             name: 'Player 1',
@@ -120,7 +122,7 @@ export class ScorecardComponent implements OnInit {
         ]
       } else if (document.location.href.includes('$4')) {
         this.plrCount = 4;
-        this.plrArry = [1,2,3,4];
+        this.plrArry = [1, 2, 3, 4];
         this.players = [
           {
             name: 'Player 1',
@@ -143,7 +145,7 @@ export class ScorecardComponent implements OnInit {
     }
     this._golfCourseService.getGolfCourse().subscribe(data => this.golfCourse = data);
     this.getTotalYards();
-  }
+  };
   calculateScore(playerNum) {
     let score: number = 0;
     let scoreVar: any;
@@ -262,10 +264,9 @@ export class ScorecardComponent implements OnInit {
   }
   loadData() {
     let DBPlayers;
-    const docRef = db.collection("sessionData").doc("data");
-    docRef.get().then(function(doc) {
+    // if (document.location.href.includes('*load'))
+    this.docRef.get().then(function(doc) {
       if (doc.exists) {
-        // @ts-ignore
         DBPlayers = doc.data();
         if (document.location.href.includes(DBPlayers.courseID)) {
           if (document.location.href.includes(`$${DBPlayers.playerNum}`)) {
@@ -280,17 +281,17 @@ export class ScorecardComponent implements OnInit {
               }
             } else {
               alert(`The Data you are trying to load is for:\nThe ${DBPlayers.Tee} Tee\n Redirecting You Now...`);
-              document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}`;
+              document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}*load`;
               document.location.reload();
             }
           } else {
-           alert(`The Data you are trying to load is for:\n${DBPlayers.playerNum} player(s)\n Redirecting You Now...`);
-            document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}`;
+           alert(`The Data you are trying to load is for:\n${DBPlayers.playerNum} player(s)\nat the ${DBPlayers.Tee} Tee\n Redirecting You Now...`);
+            document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}*load`;
             document.location.reload();
           }
         } else {
-          alert(`The Data you are trying to load is for:\n${DBPlayers.courseName}\nRedirecting You Now...`);
-          document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}`;
+          alert(`The Data you are trying to load is for:\n${DBPlayers.courseName},\nwith ${DBPlayers.playerNum} Player(s),\nat the ${DBPlayers.Tee} Tee.\n Redirecting You Now...`);
+          document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}*load`;
           document.location.reload();
         }
       }
