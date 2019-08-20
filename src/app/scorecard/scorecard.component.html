@@ -2,8 +2,11 @@
   <div class="card" style="display: inline-flex;">
     <div class="card-body">
       <h5 class="card-title">{{golfCourse.data.name}} Scorecard </h5>
-      <div style="display: flex; flex-direction: row; justify-content: space-between;">
+      <div style="display: flex; flex-direction: row; justify-content: space-between; margin-bottom: 1rem;">
         <a href="{{document.location.href}}" class="card-link" (click)="saveData();">Save</a>
+        <div>
+<!--          <input id="docID" style="width: 240px; text-align: center; padding: 0;" placeholder="Session ID" alt="Paste Session ID Here, to Continue Session, or leave empty for a new session.">-->
+        </div>
         <a href="{{document.location.href}}" class="card-link" (click)="loadData();">Load</a>
       </div>
 
@@ -42,7 +45,7 @@
           </div>
         </div>
       </div>
-      <div id="cbody">{{genBackButton()}}</div>
+      <div id="cbody" style="margin-top: 1rem;">{{genBackButton()}}</div>
     </div>
   </div>
 </div>

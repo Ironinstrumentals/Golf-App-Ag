@@ -14,7 +14,6 @@ const db = firebase.firestore();
   styleUrls: ['./scorecard.component.css']
 })
 export class ScorecardComponent implements OnInit {
-  docRef: any = db.collection("sessionData").doc("data");
   document = document;
   golfCourse: any;
   Tee: number = 4;
@@ -263,9 +262,11 @@ export class ScorecardComponent implements OnInit {
     }
   }
   loadData() {
+    // @ts-ignore
+    console.log(localStorage.getItem('SessionID'));
+    let docRef: any = db.collection("sessionData").doc(localStorage.getItem('SessionID'));
     let DBPlayers;
-    // if (document.location.href.includes('*load'))
-    this.docRef.get().then(function(doc) {
+    docRef.get().then(function(doc) {
       if (doc.exists) {
         DBPlayers = doc.data();
         if (document.location.href.includes(DBPlayers.courseID)) {
@@ -281,17 +282,17 @@ export class ScorecardComponent implements OnInit {
               }
             } else {
               alert(`The Data you are trying to load is for:\nThe ${DBPlayers.Tee} Tee\n Redirecting You Now...`);
-              document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}*load`;
+              document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}`;
               document.location.reload();
             }
           } else {
            alert(`The Data you are trying to load is for:\n${DBPlayers.playerNum} player(s)\nat the ${DBPlayers.Tee} Tee\n Redirecting You Now...`);
-            document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}*load`;
+            document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}`;
             document.location.reload();
           }
         } else {
           alert(`The Data you are trying to load is for:\n${DBPlayers.courseName},\nwith ${DBPlayers.playerNum} Player(s),\nat the ${DBPlayers.Tee} Tee.\n Redirecting You Now...`);
-          document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}*load`;
+          document.location.href = `/scorecard#${DBPlayers.courseID}$${DBPlayers.playerNum}&${DBPlayers.Tee}`;
           document.location.reload();
         }
       }
@@ -318,7 +319,29 @@ export class ScorecardComponent implements OnInit {
     }
     // console.log(this.players);
     // SAVE HERE
-    db.collection("sessionData").doc("data").set({
+    // @ts-ignore
+    if (localStorage.getItem('SessionID') != null && localStorage.getItem('SessionID') != '') {
+      this.updateData();
+    } else {
+      db.collection("sessionData").add({
+        players: this.players,
+        courseID: this.golfCourse.data.id,
+        playerNum: this.players.length,
+        courseName: this.golfCourse.data.name,
+        Tee: this.TeeType
+      })
+        .then(function(docRef) {
+          console.log("Document written with ID: ", docRef.id);
+          localStorage.setItem('SessionID', docRef.id);
+        })
+        .catch(function(error) {
+          console.error("Error adding document: ", error);
+        });
+    }
+  }
+  updateData() {
+    // @ts-ignore
+    db.collection("sessionData").doc(document.getElementById('docID').value).set({
       players: this.players,
       courseID: this.golfCourse.data.id,
       playerNum: this.players.length,
