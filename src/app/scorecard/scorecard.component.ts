@@ -36,7 +36,6 @@ export class ScorecardComponent implements OnInit {
     let YardVar: number;
     for (let i = 0; i < this.golfCourse.data.holes.length; i++) {
       YardVar = parseInt(this.golfCourse.data.holes[i].teeBoxes[this.Tee].yards);
-      // console.log(YardVar);
       Yards += YardVar;
     }
     this.totalYards = Yards;
@@ -341,7 +340,7 @@ export class ScorecardComponent implements OnInit {
   }
   updateData() {
     // @ts-ignore
-    db.collection("sessionData").doc(document.getElementById('docID').value).set({
+    db.collection("sessionData").doc(localStorage.getItem('SessionID')).set({
       players: this.players,
       courseID: this.golfCourse.data.id,
       playerNum: this.players.length,
