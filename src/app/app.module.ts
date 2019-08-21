@@ -10,6 +10,8 @@ import { GolfCourseComponent } from './golf-course/golf-course.component';
 import { CourseListComponent } from './course-list/course-list.component';
 import { NoNameDupesPipe } from './no-name-dupes.pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [],
   bootstrap: [NavbarComponent, AppComponent]
