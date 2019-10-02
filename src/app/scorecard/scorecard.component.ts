@@ -1,17 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {GolfCourseService} from "../golf-course.service";
 import * as firebase from "firebase";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyDoIRfzwACpULEteVNVZf-4TZpv5LFmHFw",
-  authDomain: "angular-golf-app-55a6a.firebaseapp.com",
-  databaseURL: "https://angular-golf-app-55a6a.firebaseio.com",
-  projectId: "angular-golf-app-55a6a",
-  storageBucket: "angular-golf-app-55a6a.appspot.com",
-  messagingSenderId: "869575472408",
-  appId: "1:869575472408:web:d3344872ac3da94e"
-};
-firebase.initializeApp(firebaseConfig);
+firebase.initializeApp({
+  apiKey: '### FIREBASE API KEY ###',
+  authDomain: '### FIREBASE AUTH DOMAIN ###',
+  projectId: 'angular-golf-app-55a6a'
+});
 
 const db = firebase.firestore();
 @Component({
