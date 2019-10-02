@@ -1,3 +1,3 @@
 export interface GolfApi {
-  courses: Object[];
+  courses: object[];
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {GolfApiService} from "../golf-api.service";
+import {GolfApiService} from '../golf-api.service';
 
 @Component({
   selector: 'app-course-list',
